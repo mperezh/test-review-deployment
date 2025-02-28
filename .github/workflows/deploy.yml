@@ -34,10 +34,6 @@ jobs:
             echo "Error: La fecha de nacimiento no está presente en el cuerpo del issue."
             exit 1
           fi
-          if [[ ! "$ISSUE_BODY" =~ "Fecha de nacimiento: [0-9]{4}-[0-9]{2}-[0-9]{2}" ]]; then
-            echo "Error: El formato de la fecha de nacimiento es incorrecto. Debe ser YYYY-MM-DD."
-            exit 1
-          fi
 
           echo "Formato del issue válido."
 
@@ -59,7 +55,7 @@ jobs:
           # Extraemos los datos relevantes del body del issue
           echo "name=$(echo $ISSUE_BODY | grep -oP 'Nombre: \K.*')" >> $GITHUB_ENV
           echo "surname=$(echo $ISSUE_BODY | grep -oP 'Apellido: \K.*')" >> $GITHUB_ENV
-          echo "birthdate=$(echo $ISSUE_BODY | grep -oP 'Fecha de nacimiento: \K.*')" >> $GITHUB_ENV
+          echo "birthdate=$(echo $ISSUE_BODY | grep -oP 'Fecha de nacimiento (YYYY-MM-DD): \K.*')" >> $GITHUB_ENV
 
       - name: Deploy to Review Environment
         id: deploy
@@ -87,8 +83,7 @@ jobs:
       - name: Process Information
         run: |
           echo "Processing issue data..."
-          # Aquí podrías procesar la información del issue, como calcular la edad:
-          echo "La persona ${{ env.name }} ${{ env.surname }} tiene $(($(date +%Y) - $(date -d ${{ env.birthdate }} +%Y))) años."
+          echo "La persona ${{ env.name }} ${{ env.surname }} nacio el ${{ env.birthdate }}"
 
   close_issue:
     runs-on: ubuntu-latest
