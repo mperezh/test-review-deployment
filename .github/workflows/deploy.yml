@@ -53,9 +53,9 @@ jobs:
           echo "Extracting data from issue..."
 
           # Extraemos los datos relevantes del body del issue
-          echo "name=$(echo $ISSUE_BODY | grep -oP 'Nombre: \K.*')" >> $GITHUB_ENV
-          echo "surname=$(echo $ISSUE_BODY | grep -oP 'Apellido: \K.*')" >> $GITHUB_ENV
-          echo "birthdate=$(echo $ISSUE_BODY | grep -oP 'Fecha de nacimiento (YYYY-MM-DD): \K.*')" >> $GITHUB_ENV
+          echo "name=$(echo $ISSUE_BODY | grep -oP '(?<=Nombre:\s)(.*?)(?=\n)' )" >> $GITHUB_ENV
+          echo "surname=$(echo $ISSUE_BODY | grep -oP '(?<=Apellido:\s)(.*?)(?=\n)' )" >> $GITHUB_ENV
+          echo "birthdate=$(echo $ISSUE_BODY | grep -oP '(?<=Fecha de nacimiento \(YYYY-MM-DD\):\s)(.*?)(?=\n)' )" >> $GITHUB_ENV
 
       - name: Deploy to Review Environment
         id: deploy
@@ -66,7 +66,7 @@ jobs:
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -d '{
-              "ref": "refs/heads/main",  # Esto puede ser una rama o el PR si es necesario.
+              "ref": "refs/heads/main",
               "task": "deploy",
               "environment": "review", 
               "auto_merge": false,
