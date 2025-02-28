@@ -7,11 +7,8 @@ assignees: ''
 
 ---
 
-**Nombre:**
-<!-- Escribe el nombre aquí -->
+Nombre: <!-- Escribe el nombre aquí -->
 
-**Apellido:**
-<!-- Escribe el apellido aquí -->
+Apellido: <!-- Escribe el apellido aquí -->
 
-**Fecha de nacimiento (YYYY-MM-DD):**
-<!-- Escribe la fecha de nacimiento aquí -->
+Fecha de nacimiento (YYYY-MM-DD): <!-- Escribe la fecha de nacimiento aquí -->

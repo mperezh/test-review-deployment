@@ -2,7 +2,7 @@ name: Deploy to Review Environment on Issue
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened]
 
 jobs:
   validate:
@@ -30,7 +30,7 @@ jobs:
           fi
 
           # Validar fecha de nacimiento (formato YYYY-MM-DD)
-          if [[ ! "$ISSUE_BODY" =~ "Fecha de nacimiento:" ]]; then
+          if [[ ! "$ISSUE_BODY" =~ "Fecha de nacimiento (YYYY-MM-DD):" ]]; then
             echo "Error: La fecha de nacimiento no está presente en el cuerpo del issue."
             exit 1
           fi
