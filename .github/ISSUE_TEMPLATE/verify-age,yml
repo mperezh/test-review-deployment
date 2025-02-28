@@ -1,0 +1,27 @@
+name: Verify Age Template
+description: Use this template to verify age information.
+labels: age-verification
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Por favor, complete la siguiente información:
+
+  - type: input
+    attributes:
+      label: Nombre
+      description: Ingrese su nombre completo.
+      required: true
+
+  - type: input
+    attributes:
+      label: Apellido
+      description: Ingrese su apellido.
+      required: true
+
+  - type: input
+    attributes:
+      label: Fecha de nacimiento
+      description: Ingrese su fecha de nacimiento en el formato YYYY-MM-DD.
+      required: true
